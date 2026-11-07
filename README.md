@@ -66,19 +66,6 @@
   </table>
 </div>
 
----
-
-## 🚀 গিটহাব পেজে হোস্ট করার নিয়ম (GitHub Pages Setup)
-
-এই ওয়েবসাইটটি GitHub Pages-এর মাধ্যমে খুব সহজেই সরাসরি লাইভ করা যায়:
-1. রিপোজিটরির **Settings** ট্যাবে যান।
-2. বাঁপাশের মেনু থেকে **Pages** নির্বাচন করুন।
-3. **Build and deployment > Branch**-এ গিয়ে `main` (বা `gh-pages`) এবং ফোল্ডার `/ (root)` সিলেক্ট করে **Save** করুন।
-4. কয়েক সেকেন্ডের মধ্যে ওয়েবসাইটটি লাইভ হয়ে যাবে:  
-   👉 `https://direct2amin.github.io/hifzulquran/`
-
----
-
 ## 📄 লাইসেন্স (License)
 
 এই প্রজেক্টটি [MIT License](LICENSE)-এর অধীনে উন্মুক্ত।
