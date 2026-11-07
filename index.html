@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>হিফজুল কুরআন - Hifzul Quran | অফলাইন ১৫ লাইনের নূরানী মুসহাফ ও হিফজ ট্র্যাকার</title>
+  <meta name="description" content="বিজ্ঞাপনমুক্ত ও সম্পূর্ণ অফলাইন ১৫ লাইনের নূরানী মুসহাফ, খতম প্ল্যানার, স্ট্রিক সুরক্ষা এবং গুগল ড্রাইভ ব্যাকআপ সুবিধাযুক্ত আধুনিক হিফজ অ্যাপ।">
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0b3b2c;
+      --primary-dark: #06231a;
+      --primary-light: #165641;
+      --gold: #c59b27;
+      --gold-light: #e5c05d;
+      --gold-bg: #fdf9ee;
+      --bg-cream: #f9f8f4;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -3px rgba(11, 59, 44, 0.1);
+      --shadow-lg: 0 20px 40px -4px rgba(11, 59, 44, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.2);
+    }
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 76px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    .btn-nav {
+      background: var(--primary);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(11, 59, 44, 0.2);
+    }
+    .btn-nav:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 70px 0 60px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg-cream) 100%);
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 48px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-bg);
+      border: 1px solid rgba(197, 155, 39, 0.35);
+      color: #8c6807;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 46px;
+      line-height: 1.25;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .hero h1 span {
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 32px;
+      max-width: 540px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--gold) 0%, #b3891b 100%);
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(197, 155, 39, 0.35);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(197, 155, 39, 0.45);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1.5px solid #d1d5db;
+      color: var(--text-main);
+      padding: 14px 26px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .play-badge {
+      font-size: 12px;
+      background: #e5e7eb;
+      color: #374151;
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-left: 6px;
+    }
+    .meta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+    .meta-tag svg {
+      width: 18px;
+      height: 18px;
+      color: var(--gold);
+    }
+
+    /* Phone Mockup Frame */
+    .mockup-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .mockup-glow {
+      position: absolute;
+      width: 320px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(197, 155, 39, 0.2) 0%, rgba(11, 59, 44, 0.08) 60%, transparent 80%);
+      filter: blur(40px);
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .phone-mockup {
+      position: relative;
+      z-index: 2;
+      width: 310px;
+      height: 640px;
+      background: #111827;
+      border-radius: 46px;
+      padding: 10px;
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 38px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.35s ease;
+    }
+
+    /* Screenshot Tabs Section */
+    .section-screenshots {
+      padding: 90px 0;
+      background: #fff;
+    }
+    .section-title {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 48px;
+    }
+    .section-title h2 {
+      font-size: 36px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .tab-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .tab-pill {
+      background: var(--bg-cream);
+      border: 1px solid #e5e7eb;
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-pill:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .tab-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 18px rgba(11, 59, 44, 0.2);
+    }
+
+    .screenshot-display {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 56px;
+      max-width: 950px;
+      margin: 0 auto;
+      background: var(--bg-cream);
+      padding: 44px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(197, 155, 39, 0.15);
+    }
+    .preview-box {
+      display: flex;
+      justify-content: center;
+    }
+    .preview-phone {
+      width: 280px;
+      height: 580px;
+      background: #1f2937;
+      border-radius: 40px;
+      padding: 8px;
+      box-shadow: var(--shadow-lg);
+    }
+    .preview-phone img {
+      width: 100%;
+      height: 100%;
+      border-radius: 32px;
+      object-fit: cover;
+    }
+    .tab-info h3 {
+      font-size: 28px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .tab-info .tab-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .feature-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .feature-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-main);
+    }
+    .feature-point svg {
+      width: 20px;
+      height: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Core Features Grid */
+    .section-features {
+      padding: 90px 0;
+      background: var(--bg-cream);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      padding: 36px 30px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #edf0f2;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(197, 155, 39, 0.3);
+    }
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      background: var(--gold-bg);
+      border: 1px solid rgba(197, 155, 39, 0.25);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+    .feature-card h4 {
+      font-size: 20px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      padding: 70px 0;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(197, 155, 39, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-banner h2 {
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: 18px;
+      color: #d1fae5;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    /* Footer */
+    footer {
+      background: #041711;
+      color: #9ca3af;
+      padding: 50px 0 30px;
+      font-size: 14px;
+    }
+    .footer-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #142a22;
+      margin-bottom: 25px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .meta-tags {
+        justify-content: center;
+      }
+      .screenshot-display {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+      }
+      .preview-phone {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <img src="assets/img/logo.png" alt="Hifzul Quran Logo">
+        <div>
+          <span class="brand-title">হিফজুল কুরআন</span>
+          <span class="brand-subtitle">Hifzul Quran</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#screenshots">স্ক্রিনশট</a></li>
+        <li><a href="#features">ফিচারসমূহ</a></li>
+        <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
+        <li><a href="https://github.com/direct2amin/hifzulquran/releases/latest/download/HifzulQuran.apk" class="btn-nav">ডাউনলোড APK</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge">
+          <span>✨</span> ১০০% অফলাইন ও সম্পূর্ণ বিজ্ঞাপনমুক্ত
+        </div>
+        <h1>হাফেজ ও তিলাওয়াতকারীদের জন্য <span>১৫ লাইনের নূরানী মুসহাফ</span></h1>
+        <p>
+          তিলাওয়াত হোক নির্বিঘ্ন ও একনিষ্ঠ। কোনো বিজ্ঞাপন নেই, ইন্টারনেট সংযোগ ছাড়া সম্পূর্ণ অফলাইনে পড়ুন, স্বয়ংক্রিয় খতম লক্ষ্য পূরণ করুন এবং গুগল ড্রাইভে নিরাপদে তিলাওয়াত হিসেব সংরক্ষণ করুন।
+        </p>
+        <div class="hero-actions">
+          <a href="https://github.com/direct2amin/hifzulquran/releases/latest/download/HifzulQuran.apk" class="btn-primary">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+            ডাউনলোড করুন (APK)
+          </a>
+          <a href="#playstore" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.036 2.036 0 0 1-.61-.954V2.768c0-.36.216-.704.61-.954zm11.235 11.238l2.091 2.09-11.776 6.8c-.378.218-.756.24-1.05.074l10.735-8.964zm0-2.104L4.11 1.984c.293-.166.671-.144 1.05.074l11.775 6.8-2.091 2.09zm1.096 1.052l3.473 2.006c.928.536.928 1.411 0 1.947l-3.473 2.006-1.89-1.98 1.89-1.979z"/></svg>
+            Google Play <span class="play-badge">শীঘ্রই আসছে</span>
+          </a>
+        </div>
+        <div class="meta-tags">
+          <div class="meta-tag">
+            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            ভার্সন ১.০.০
+          </div>
+          <div class="meta-tag">
+            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            অফলাইন ও বিজ্ঞাপনমুক্ত
+          </div>
+          <div class="meta-tag">
+            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            গুগল ড্রাইভ ক্লাউড ব্যাকআপ
+          </div>
+        </div>
+      </div>
+
+      <div class="mockup-wrapper">
+        <div class="mockup-glow"></div>
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <img id="heroMockup" src="assets/img/3_quran_screen.png" alt="১৫ লাইনের নূরানী মুসহাফ স্ক্রিন">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Screen Showcase -->
+  <section class="section-screenshots" id="screenshots">
+    <div class="container">
+      <div class="section-title">
+        <h2>অ্যাপের প্রতিটি সেকশনের বাস্তব রূপ</h2>
+        <p>হাফেজ ও তিলাওয়াতকারীদের সুবিধার কথা মাথায় রেখে অত্যন্ত যত্ন ও পরিচ্ছন্নতার সাথে তৈরি করা হয়েছে প্রতিটি স্ক্রিন।</p>
+      </div>
+
+      <!-- Tab Pills -->
+      <div class="tab-pills">
+        <button class="tab-pill active" onclick="switchTab(0)">🏠 ১. হোম স্ক্রিন</button>
+        <button class="tab-pill" onclick="switchTab(1)">🎯 ২. তিলাওয়াত লক্ষ্য ও খতম</button>
+        <button class="tab-pill" onclick="switchTab(2)">📖 ৩. ১৫ লাইনের নূরানী মুসহাফ</button>
+        <button class="tab-pill" onclick="switchTab(3)">📊 ৪. স্ট্যাট ও অ্যানালিটিক্স</button>
+        <button class="tab-pill" onclick="switchTab(4)">⚙️ ৫. সেটিংস ও ক্লাউড সিঙ্ক</button>
+        <button class="tab-pill" onclick="switchTab(5)">📑 ৬. পারা সিলেক্টর</button>
+      </div>
+
+      <!-- Tab Display Area -->
+      <div class="screenshot-display">
+        <div class="preview-box">
+          <div class="preview-phone">
+            <img id="tabImage" src="assets/img/1_home_screen.png" alt="App Tab Preview">
+          </div>
+        </div>
+        <div class="tab-info">
+          <h3 id="tabTitle">হোম স্ক্রিন • দৈনিক তিলাওয়াত সঙ্গী</h3>
+          <p class="tab-desc" id="tabDesc">
+            অ্যাপ খুললেই দেখতে পাবেন আপনার সর্বশেষ পঠিত পৃষ্ঠা, এক ক্লিকেই পূর্ববর্তী স্থান থেকে তিলাওয়াত শুরু করার সুযোগ এবং প্রতিদিনের অনুপ্রেরণামূলক হাদীস ও কুরআনের আয়াত।
+          </p>
+          <ul class="feature-points" id="tabPoints">
+            <li class="feature-point">
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span><strong>পড়া চালিয়ে যান:</strong> শেষবার যে পৃষ্ঠায় ছিলেন সরাসরি সেখান থেকে শুরু করুন।</span>
+            </li>
+            <li class="feature-point">
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span><strong>তিলাওয়াত নির্বাচন করুন:</strong> পারা ও পারার পৃষ্ঠা নম্বর ড্রপডাউন দিয়ে মুহূর্তেই কাঙ্ক্ষিত পৃষ্ঠায় পৌঁছান।</span>
+            </li>
+            <li class="feature-point">
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span><strong>নিয়মিত পঠিত সূরাসমূহ:</strong> সূরা আল-কাহফ, ইয়াসীন, ওয়াকিয়াহ, মূলক ইত্যাদিতে দ্রুত এক-ট্যাপে জাম্প।</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Core Features Grid -->
+  <section class="section-features" id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>কেন হিফজুল কুরআন আপনার জন্য সেরা পছন্দ?</h2>
+        <p>ইসলামিক অনুশাসন ও তিলাওয়াতের পবিত্রতা রক্ষা করে আধুনিক প্রযুক্তির নিখুঁত মেলবন্ধন।</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="icon-box">📖</div>
+          <h4>১৫ লাইনের নূরানী হাফেজী মুসহাফ</h4>
+          <p>উপমহাদেশে সর্বাধিক পঠিত ঐতিহ্যবাহী ১৫ লাইনের নূরানী ফন্ট ও ঝকঝকে পাতা। প্রতিটি লাইনের বিন্যাস বজায় থাকায় হাফেজদের মুখস্থ ও ইয়াদ রাখার জন্য শতভাগ উপযোগী।</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="icon-box">🚫</div>
+          <h4>১০০% বিজ্ঞাপনমুক্ত ও পবিত্র</h4>
+          <p>অ্যাপের ভেতর কোনো ধরণের কমার্শিয়াল ব্যানার, পপআপ বা ভিডিও বিজ্ঞাপন নেই। তিলাওয়াত ও যিকিরের সময় সম্পূর্ণ মনোযোগ যেন নষ্ট না হয়।</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="icon-box">⚡</div>
+          <h4>সম্পূর্ণ অফলাইন সুবিধা</h4>
+          <p>একবার ইন্সটল করলেই সব পাতা ও ফিচার মোবাইলের মধ্যেই থাকে। প্রত্যন্ত অঞ্চলে বা ইন্টারনেট ডাটা প্যাক না থাকলেও নির্বিঘ্নে কুরআন পড়ুন।</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="icon-box">☁️</div>
+          <h4>গুগল ড্রাইভে অটোমেটিক ক্লাউড ব্যাকআপ</h4>
+          <p>মোবাইল পরিবর্তন বা রিসেট হলেও আপনার তিলাওয়াতের পরিসংখ্যান, খতম হিসেব বা বুকমার্ক হারাবে না। এক ক্লিকেই আপনার নিজস্ব গুগল ড্রাইভে সেভ ও রিস্টোর।</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="icon-box">🎯</div>
+          <h4>খতম প্ল্যানার ও স্ট্রিক রিমাইন্ডার</h4>
+          <p>১ মাস, ২ মাস বা আপনার সুবিধামতো কাস্টম দিনে কুরআন খতমের পরিকল্পনা করুন। প্রতিদিনের আমল যেন ছুটে না যায় সেজন্য সন্ধ্যায় স্বয়ংক্রিয় স্ট্রিক রিমাইন্ডার।</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="icon-box">🎙️</div>
+          <h4>ভয়েস সার্চ ও তাৎক্ষণিক অনুসন্ধান</h4>
+          <p>মুখে যেকোনো আয়াতের বা সূরার অংশ বললেই কৃত্রিম বুদ্ধিমত্তার ভয়েস সার্চ দিয়ে কাঙ্ক্ষিত সূরা ও পৃষ্ঠায় সরাসরি চলে যাওয়া যায়।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner" id="playstore">
+    <div class="container">
+      <h2>আজই আপনার তিলাওয়াত জীবনকে সমৃদ্ধ করুন</h2>
+      <p>পবিত্র কুরআনের সাথে আপনার প্রাত্যহিক সম্পর্ককে আরও ঘনিষ্ঠ করতে এখনই হিফজুল কুরআন অ্যাপটি ডাউনলোড করুন।</p>
+      <div class="cta-buttons">
+        <a href="https://github.com/direct2amin/hifzulquran/releases/latest/download/HifzulQuran.apk" class="btn-primary">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+          সরাসরি APK ডাউনলোড (১২৭ MB)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-wrapper">
+        <div class="footer-brand">
+          <img src="assets/img/logo.png" alt="Logo">
+          <span>হিফজুল কুরআন • Hifzul Quran</span>
+        </div>
+        <div class="footer-links">
+          <a href="#screenshots">স্ক্রিনশট</a>
+          <a href="#features">ফিচারসমূহ</a>
+          <a href="privacy-policy.html">প্রাইভেসি পলিসি (Privacy Policy)</a>
+          <a href="mailto:direct2amin@gmail.com">যোগাযোগ (Contact)</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; ২০২৬ হিফজুল কুরআন (Hifzul Quran) • সর্বস্বত্ব সংরক্ষিত। ডেভেলপার: Amin</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tab Switching Script -->
+  <script>
+    const tabsData = [
+      {
+        title: "হোম স্ক্রিন • দৈনিক তিলাওয়াত সঙ্গী",
+        desc: "অ্যাপ খুললেই দেখতে পাবেন আপনার সর্বশেষ পঠিত পৃষ্ঠা, এক ক্লিকেই পূর্ববর্তী স্থান থেকে তিলাওয়াত শুরু করার সুযোগ এবং প্রতিদিনের অনুপ্রেরণামূলক হাদীস ও কুরআনের আয়াত।",
+        image: "assets/img/1_home_screen.png",
+        points: [
+          "<strong>পড়া চালিয়ে যান:</strong> শেষবার যে পৃষ্ঠায় ছিলেন সরাসরি সেখান থেকে শুরু করুন।",
+          "<strong>তিলাওয়াত নির্বাচন করুন:</strong> পারা ও পারার পৃষ্ঠা নম্বর ড্রপডাউন দিয়ে মুহূর্তেই কাঙ্ক্ষিত পৃষ্ঠায় পৌঁছান।",
+          "<strong>নিয়মিত পঠিত সূরাসমূহ:</strong> সূরা আল-কাহফ, ইয়াসীন, ওয়াকিয়াহ, মূলক ইত্যাদিতে দ্রুত এক-ট্যাপে জাম্প।"
+        ]
+      },
+      {
+        title: "লক্ষ্য স্ক্রিন • কুরআন খতম ও তিলাওয়াত প্ল্যানার",
+        desc: "কুরআন নিয়মিত খতম করার সুনির্দিষ্ট পরিকল্পনা নির্ধারণ করুন। আপনার সুবিধামতো ১ মাস, ২ মাস, ৩ মাস বা কাস্টম দিনে খতম করার দৈনিক পৃষ্ঠা সংখ্যা স্বয়ংক্রিয়ভাবে হিসাব হয়ে যায়।",
+        image: "assets/img/2_goal_screen.png",
+        points: [
+          "<strong>দৈনিক পৃষ্ঠা ট্র্যাকার:</strong> প্রতিদিন কয় পৃষ্ঠা পড়েছেন তা এক ট্যাপে মার্ক করার সহজ সুবিধা।",
+          "<strong>কাস্টম খতম প্ল্যান:</strong> যেকোনো নির্দিষ্ট সময়ে খতম সম্পন্ন করার জন্য নিজস্ব প্ল্যান তৈরি।",
+          "<strong>সন্ধ্যায় স্ট্রিক রিমাইন্ডার:</strong> দৈনিক লক্ষ্য পূরণ না হলে মাগরিবের পর চমৎকার অ্যালার্ট দিয়ে ধারাবাহিক আমল সচল রাখা।"
+        ]
+      },
+      {
+        title: "কুরআন স্ক্রিন • ১৫ লাইনের ঐতিহ্যবাহী নূরানী মুসহাফ",
+        desc: "উপমহাদেশের হাফেজদের চেনা ও অভ্যস্ত ১৫ লাইনের নূরানী পাতার হুবহু রূপ। প্রতিটি পারা ও সূরার আকর্ষণীয় গোল্ডেন ফ্রেম এবং স্পষ্ট আরবি হরফ।",
+        image: "assets/img/3_quran_screen.png",
+        points: [
+          "<strong>আসল মুদ্রণ অনুভূতি:</strong> নূরানী ছাপার পৃষ্ঠাগুলো পড়ার বাস্তব তৃপ্তি দেয়।",
+          "<strong>আয়াত ও শব্দ অনুসন্ধান:</strong> দ্রুত আয়াতের অর্থ ও পৃষ্ঠা খুঁজে পাওয়ার সুবিধা।",
+          "<strong>কাগজের আরামদায়ক রঙ:</strong> দিনের বেলায় লাইট, হালকা আলোতে সেপিয়া এবং রাতে চোখের সুরক্ষায় ডার্ক মোড।"
+        ]
+      },
+      {
+        title: "স্ট্যাট স্ক্রিন • তিলাওয়াত অগ্রগতি ও পরিসংখ্যান",
+        desc: "আপনার প্রতিটি তিলাওয়াতের পুঙ্খানুপুঙ্খ হিসাব রাখুন। আপনি মোট কত পৃষ্ঠা পড়েছেন, কতটি খতম সম্পন্ন করেছেন এবং কত দিনের স্ট্রিক ধরে রেখেছেন তার পূর্ণ বিবরণ।",
+        image: "assets/img/4_stats_screen.png",
+        points: [
+          "<strong>খতম অগ্রগতি বার:</strong> ৬১০ পৃষ্ঠার মধ্যে আপনার খতমের বর্তমান অবস্থান শতাংশে প্রদর্শন।",
+          "<strong>সাপ্তাহিক চার্ট:</strong> গত ৭ দিনে আপনার তিলাওয়াতের গ্রাফিকাল অ্যাক্টিভিটি।",
+          "<strong>লাইফটাইম রেকর্ড:</strong> মোট তিলাওয়াতকৃত খতম সংখ্যা ও আয়াতের স্থায়ী সংরক্ষণ।"
+        ]
+      },
+      {
+        title: "সেটিংস স্ক্রিন • গুগল ড্রাইভ ক্লাউড ব্যাকআপ ও পারসোনালাইজেশন",
+        desc: "আপনার অ্যাপের ভাষা, পড়ার মাধ্যম ও নিরাপত্তা সেটিংস নিয়ন্ত্রণ করুন। সবচেয়ে বড় সুবিধা হলো—এক ক্লিকেই আপনার নিজস্ব গুগল ড্রাইভে সম্পূর্ণ তিলাওয়াত ডেটা ব্যাকআপ নেওয়া।",
+        image: "assets/img/5_settings_screen.png",
+        points: [
+          "<strong>গুগল ড্রাইভ সিঙ্ক:</strong> কোনো বাড়তি ঝামেলা ছাড়াই পার্সোনাল ক্লাউডে স্বয়ংক্রিয় ব্যাকআপ।",
+          "<strong>বাংলা ও ইংরেজি ভাষা:</strong> আপনার পছন্দের ভাষায় সম্পূর্ণ অ্যাপ পরিচালনা করুন।",
+          "<strong>স্ক্রিন সবসময় অন রাখুন:</strong> তিলাওয়াত চলাকালীন বারবার মোবাইল স্ক্রিন বন্ধ হয়ে যাওয়ার কোনো ঝামেলা নেই।"
+        ]
+      },
+      {
+        title: "পারা ও পৃষ্ঠা সিলেক্টর • সহজ ও দ্রুত নেভিগেশন",
+        desc: "পবিত্র কুরআনের ৩০টি পারার যেকোনো পারা এবং সেই পারার নির্দিষ্ট পৃষ্ঠায় এক ট্যাপেই প্রবেশ করুন। অত্যন্ত পরিচ্ছন্ন, সাজানো ও আধুনিক গ্রিড লেআউট।",
+        image: "assets/img/extra_para_selector.png",
+        points: [
+          "<strong>৩০টি পারার তালিকা:</strong> প্রতিটি পারার আরবি নাম ও শুরুর পৃষ্ঠা স্পষ্ট প্রদর্শন।",
+          "<strong>পারার পৃষ্ঠা নম্বর নির্বাচন:</strong> পারার ভেতরে ১ থেকে ২০ পৃষ্ঠা পর্যন্ত সরাসরি নির্বাচন।",
+          "<strong>এক ট্যাপে জাম্প:</strong> যেকোনো পৃষ্ঠা নির্বাচন করা মাত্রই নূরানী মুসহাফের পাতায় পৌঁছে যাওয়া।"
+        ]
+      }
+    ];
+
+    function switchTab(index) {
+      // update tab pills
+      const pills = document.querySelectorAll('.tab-pill');
+      pills.forEach((p, idx) => {
+        if (idx === index) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+
+      // update content
+      const data = tabsData[index];
+      const img = document.getElementById('tabImage');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = data.image;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('tabTitle').innerText = data.title;
+      document.getElementById('tabDesc').innerText = data.desc;
+
+      const pointsEl = document.getElementById('tabPoints');
+      pointsEl.innerHTML = '';
+      data.points.forEach(point => {
+        const li = document.createElement('li');
+        li.className = 'feature-point';
+        li.innerHTML = `
+          <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <span>${point}</span>
+        `;
+        pointsEl.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

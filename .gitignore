@@ -1,0 +1,5 @@
+# Ignore large binaries and OS files
+*.apk
+download/
+.DS_Store
+Thumbs.db
