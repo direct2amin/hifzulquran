@@ -9,6 +9,7 @@
 
 > 🌐 **লাইভ ওয়েবসাইট:** [https://direct2amin.github.io/hifzulquran/](https://direct2amin.github.io/hifzulquran/)  
 > 🔒 **প্রাইভেসি পলিসি (Privacy Policy):** [https://direct2amin.github.io/hifzulquran/privacy-policy.html](https://direct2amin.github.io/hifzulquran/privacy-policy.html)  
+> 📜 **শর্তাবলী (Terms of Service):** [https://direct2amin.github.io/hifzulquran/terms-of-service.html](https://direct2amin.github.io/hifzulquran/terms-of-service.html)  
 
 ---
 
