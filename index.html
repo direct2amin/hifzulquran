@@ -40,11 +40,22 @@
       font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg-cream);
       color: var(--text-main);
       line-height: 1.6;
       overflow-x: hidden;
+      position: relative;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.menu-open {
+      overflow: hidden;
     }
 
     /* Container */
@@ -530,11 +541,113 @@
       color: #6b7280;
     }
 
-    /* Responsive */
-    @media (max-width: 900px) {
+    /* Mobile Toggle Button */
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: var(--primary);
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      line-height: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mobile-toggle:hover,
+    .mobile-toggle:focus-visible {
+      background: rgba(11, 59, 44, 0.08);
+      outline: none;
+    }
+    .mobile-toggle svg {
+      width: 28px;
+      height: 28px;
+      display: block;
+    }
+
+    /* Mobile Menu Backdrop */
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(4, 23, 17, 0.5);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 95;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .nav-backdrop.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 860px) {
+      .mobile-toggle {
+        display: block;
+      }
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 24px 28px;
+        border-bottom: 2px solid rgba(197, 155, 39, 0.3);
+        box-shadow: 0 16px 36px rgba(11, 59, 44, 0.16);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+        z-index: 99;
+        max-height: calc(100vh - 76px);
+        overflow-y: auto;
+      }
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid #f1f3f5;
+      }
+      .nav-links li:last-child {
+        border-bottom: none;
+        margin-top: 16px;
+      }
+      .nav-links a {
+        display: block;
+        padding: 14px 6px;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--primary-dark);
+        transition: color 0.2s ease, padding-left 0.2s ease;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+        padding-left: 10px;
+      }
+      .nav-links .btn-nav {
+        text-align: center;
+        padding: 14px 20px;
+        font-size: 16px;
+        border-radius: 50px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      }
       .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 40px;
       }
       .hero p {
         margin-left: auto;
@@ -548,10 +661,251 @@
       }
       .screenshot-display {
         grid-template-columns: 1fr;
-        padding: 30px 20px;
+        gap: 32px;
+        padding: 34px 22px;
       }
       .preview-phone {
         margin: 0 auto;
+      }
+      .tab-info {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .tab-pills {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 8px;
+        padding: 4px 16px 14px;
+        margin: 0 -16px 24px;
+        justify-content: flex-start;
+      }
+      .tab-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-pill {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 9px 18px;
+        font-size: 14px;
+        border-radius: 40px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .section-screenshots, .section-features {
+        padding: 56px 0;
+      }
+      .footer-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        padding-bottom: 24px;
+        margin-bottom: 20px;
+      }
+      .footer-brand {
+        justify-content: center;
+        font-size: 18px;
+      }
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 18px;
+        font-size: 13.5px;
+      }
+      .footer-bottom {
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 16px;
+      }
+      .nav-wrapper {
+        height: 64px;
+      }
+      .nav-links {
+        top: 64px;
+        max-height: calc(100vh - 64px);
+        padding: 10px 18px 24px;
+      }
+      .nav-backdrop {
+        top: 64px;
+      }
+      .brand {
+        gap: 10px;
+      }
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+      }
+      .brand-title {
+        font-size: 18px;
+      }
+      .brand-subtitle {
+        font-size: 11px;
+      }
+      .hero {
+        padding: 36px 0 28px;
+      }
+      .badge {
+        font-size: 12.5px;
+        padding: 5px 12px;
+        margin-bottom: 14px;
+      }
+      .hero h1 {
+        font-size: 26px;
+        line-height: 1.35;
+        margin-bottom: 14px;
+      }
+      .hero p {
+        font-size: 14.5px;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 330px;
+        margin: 0 auto 24px;
+        gap: 12px;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 20px;
+        font-size: 15px;
+      }
+      .meta-tags {
+        gap: 8px 12px;
+      }
+      .meta-tag {
+        font-size: 12.5px;
+      }
+      .phone-mockup {
+        width: 250px;
+        max-width: 78vw;
+        height: auto;
+        aspect-ratio: 9 / 18.5;
+        border-radius: 36px;
+        padding: 7px;
+      }
+      .phone-screen {
+        border-radius: 30px;
+      }
+      .mockup-glow {
+        width: 220px;
+        height: 360px;
+        filter: blur(35px);
+      }
+      .section-title h2 {
+        font-size: 23px;
+        line-height: 1.35;
+        margin-bottom: 8px;
+      }
+      .section-title p {
+        font-size: 13.5px;
+      }
+      .screenshot-display {
+        padding: 20px 14px;
+        border-radius: 18px;
+        gap: 22px;
+      }
+      .preview-phone {
+        width: 220px;
+        max-width: 72vw;
+        height: auto;
+        aspect-ratio: 9 / 18.5;
+        border-radius: 32px;
+        padding: 6px;
+      }
+      .preview-phone img {
+        border-radius: 26px;
+      }
+      .tab-info h3 {
+        font-size: 18.5px;
+        margin-bottom: 8px;
+      }
+      .tab-info .tab-desc {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+      .feature-points {
+        gap: 10px;
+      }
+      .feature-point {
+        font-size: 13px;
+        line-height: 1.5;
+        gap: 8px;
+      }
+      .feature-point svg {
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+      }
+      .feature-card {
+        padding: 22px 18px;
+        border-radius: 14px;
+      }
+      .icon-box {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+        border-radius: 12px;
+        margin-bottom: 14px;
+      }
+      .feature-card h4 {
+        font-size: 17.5px;
+        margin-bottom: 6px;
+      }
+      .feature-card p {
+        font-size: 13.5px;
+        line-height: 1.6;
+      }
+      .cta-banner {
+        padding: 44px 0;
+      }
+      .cta-banner h2 {
+        font-size: 24px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .cta-banner p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+      }
+      .cta-buttons {
+        width: 100%;
+      }
+      .cta-buttons .btn-primary {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+        font-size: 15px;
+        padding: 13px 20px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero h1 {
+        font-size: 23px;
+      }
+      .tab-pill {
+        padding: 8px 14px;
+        font-size: 12.5px;
+      }
+      .phone-mockup, .preview-phone {
+        width: 210px;
       }
     }
   </style>
@@ -568,15 +922,23 @@
           <span class="brand-subtitle">Hifzul Quran</span>
         </div>
       </a>
-      <ul class="nav-links">
-        <li><a href="#screenshots">স্ক্রিনশট</a></li>
-        <li><a href="#features">ফিচারসমূহ</a></li>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="মেনু খুলুন" aria-expanded="false" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#screenshots" onclick="closeMobileMenu()">স্ক্রিনশট</a></li>
+        <li><a href="#features" onclick="closeMobileMenu()">ফিচারসমূহ</a></li>
         <li><a href="privacy-policy.html">প্রাইভেসি পলিসি</a></li>
         <li><a href="terms-of-service.html">শর্তাবলী</a></li>
-        <li><a href="https://github.com/direct2amin/hifzulquran/releases/latest/download/HifzulQuran.apk" class="btn-nav">ডাউনলোড APK</a></li>
+        <li><a href="https://github.com/direct2amin/hifzulquran/releases/latest/download/HifzulQuran.apk" class="btn-nav" onclick="closeMobileMenu()">ডাউনলোড APK</a></li>
       </ul>
     </div>
   </header>
+  <div class="nav-backdrop" id="navBackdrop" onclick="closeMobileMenu()"></div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -602,7 +964,7 @@
         <div class="meta-tags">
           <div class="meta-tag">
             <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            ভার্সন ১.০.০
+            ভার্সন ১.০.২
           </div>
           <div class="meta-tag">
             <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -863,7 +1225,44 @@
         `;
         pointsEl.appendChild(li);
       });
+
+      // Smooth scroll active pill into center on mobile
+      const activePill = pills[index];
+      if (activePill && window.innerWidth <= 768) {
+        activePill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     }
+
+    // Mobile Navigation Controls
+    function toggleMobileMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const backdrop = document.getElementById('navBackdrop');
+      const toggleBtn = document.getElementById('mobileToggle');
+      const isOpen = navLinks.classList.toggle('active');
+      backdrop.classList.toggle('active', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggleBtn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    }
+
+    function closeMobileMenu() {
+      const navLinks = document.getElementById('navLinks');
+      const backdrop = document.getElementById('navBackdrop');
+      const toggleBtn = document.getElementById('mobileToggle');
+      if (navLinks && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
   </script>
 </body>
 </html>
